@@ -5,11 +5,17 @@ const router = createRouter({
     routes:[
         {
             path:'/',
-            redirect:'/wel'
+            redirect:'/index'
         },
         {
-            path:'/wel',
-            component:()=>import('../components/welcome.vue')
+            path:'/index',
+            component:()=>import('../layout/main.vue'),
+            children:[
+                {
+                    path:'',
+                    component:()=>import('../views/home/home.vue')
+                },
+            ]
         }
     ]
 })
