@@ -3,11 +3,14 @@
 </script>
 
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+    <router-view/>
 </template>
 
 <style>
-
+ #app {
+    height: 100%;
+  }
+  /* #app div:first-child{
+    height: 100%;
+  } */
 </style>

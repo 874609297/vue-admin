@@ -1,9 +1,12 @@
 
-html,body,#app,.common-layout{
+html,body,#app{
   padding: 0px;
   margin: 0px;
   height: 100%;
 }
 body{
   background-color: snow;
+}
+body>.common-layout {
+  height: 100%;
 }

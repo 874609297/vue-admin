@@ -1,6 +1,6 @@
 <template>
     <div class="common-layout">
-      <el-container class="topcontainer">
+      <el-container class="one">
         <el-aside width="200px" class="aside">
             <CommonAside></CommonAside>
         </el-aside>
@@ -30,13 +30,11 @@ export default {
 }
 </script>
 
-<style>
-.topcontainer{
-    /* position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0; */
+<style scoped>
+.common-layout{
+  height: 100%;
 }
-
+.one{
+  height: 100%;
+}
 </style>

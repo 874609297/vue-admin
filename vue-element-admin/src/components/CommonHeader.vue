@@ -43,6 +43,7 @@ export default{
 </script>
 <style scoped>
 header{
+    /* border: 1px solid red; */
     display: flex;
     width: 100%;
     justify-content: space-between;
