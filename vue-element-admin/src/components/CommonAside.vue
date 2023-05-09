@@ -1,16 +1,24 @@
 <template>
-    <div style="">
-    <el-radio-group v-model="isCollapse" style="">
-    <el-radio-button :label="false">展开</el-radio-button>
-    <el-radio-button :label="true">收起</el-radio-button>
-  </el-radio-group>
+
     <el-menu
     class="el-menu-vertical-demo"
-    :collapse="isCollapse"
+    :collapse="collapseStore.isCollapse"
+    :collapse-transition	="false" 
     >
+    <div v-show="!collapseStore.isCollapse" style="text-align: center;">
+    Levi'admin
+    </div>
+    <div v-show="collapseStore.isCollapse" style="text-align: center;">
+    Levi
+    </div>
     <!-- 无子菜单的导航 -->
-      <el-menu-item :index="item.path" v-for="item in listData.nChildren" :key="item.path">
-        <el-icon><FullScreen /></el-icon>
+      <el-menu-item :index="item.path" v-for="item in listData.nChildren" :key="item.path"
+      @click="changeLink(item.path)"
+      >
+        <el-icon>
+          <component v-if="item.icon" :is='item.icon'/>
+        </el-icon>      
+
         <template #title>
           {{item.label}}
         </template>
@@ -25,10 +33,11 @@
           
       </el-sub-menu>
   </el-menu>
-    </div>
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
+import {isCollapse} from '../store/index'
 import {ref,reactive,toRefs} from 'vue'
 export default{
     name:'CommonAside',
@@ -36,17 +45,24 @@ export default{
         //菜单列表
          let list=[
           {
+            path:'/index',
+            name:'index',
+            label:'首页',
+            icon:'House',
+            url:''
+          },
+          {
             path:'/user',
             name:"user",
             label:"用户管理",
-            icon:"",
+            icon:'User',
             url:"UserManage/UserManage"
           },
           {
-            path:'/dosomething',
+            path:'/test',
             name:'dosomething',
             label:'测试1',
-            icon:'',
+            icon:'Link',
             url:''
           },
           {
@@ -84,10 +100,18 @@ export default{
           hChildren:hasChildren(),
           nChildren:noChildren()
         })
-        const isCollapse = ref(false)
+        //侧边菜单是否收缩
+        const collapseStore = isCollapse()
+
+        //跳转路由
+        const router = useRouter()
+        const changeLink =(path)=>{
+          router.push(path)
+        }
         return{
-            isCollapse,
-            listData
+            collapseStore,
+            listData,
+            changeLink
         }
         
     }
@@ -96,7 +120,6 @@ export default{
 
 <style>
 .el-aside{
-    border: 1px solid red;
     height: 100%;
   }
 </style>

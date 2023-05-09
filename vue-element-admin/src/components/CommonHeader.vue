@@ -1,8 +1,10 @@
 <template>
-    <div class="container">
-        <el-header class="aa">
+    <div class="container" style="padding: 0px;">
+        <el-header>
             <div class="left-icon">
-                <el-button size="large">
+                <el-button size="large"
+                @click="changeCollpase"
+                >
                     <el-icon :size="20">
                         <Menu/>
                     </el-icon>
@@ -29,12 +31,24 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import {isCollapse} from '../store/index'
 import {ref} from 'vue'
 export default{
     name:'CommonHeader',
     setup(){
         const usericon = new URL("../assets/user.jpg",import.meta.url).href
+
+        //改变侧边栏展开状态
+        const changeCollpase=()=>{
+            const store = isCollapse()
+            store.isCollapse=store.isCollapse?false:true
+        }
+        //根据路由改变标题
+        const route = useRoute()
+        // let title = route
         return{
+            changeCollpase,
             usericon
         }
     },
@@ -43,10 +57,12 @@ export default{
 </script>
 <style scoped>
 header{
-    /* border: 1px solid red; */
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+}
+.el-header{
+    padding: 0;
 }
 </style>

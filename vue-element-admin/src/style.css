@@ -10,3 +10,7 @@ body{
 body>.common-layout {
   height: 100%;
 }
+.el-main{
+  padding: 0;
+  margin: 0;
+}
