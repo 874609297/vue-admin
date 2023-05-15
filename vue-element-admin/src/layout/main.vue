@@ -10,6 +10,8 @@
           <el-header>
             <CommonHeader></CommonHeader>
           </el-header>
+          <br>
+          <br>
           <el-main>
             <router-view></router-view>
           </el-main>

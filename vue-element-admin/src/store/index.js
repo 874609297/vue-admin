@@ -8,3 +8,19 @@ export const isCollapse =defineStore('pageStore',{
         }
     }
 })
+
+export const routerStore = defineStore('routerStore',{
+    state:()=>{
+        return{
+            routerList:[
+               
+            ]
+        }
+    },
+    getters:{
+        // 对路由tag进行去重处理
+        setrouterStore:()=>{
+            
+        }
+    }
+})
