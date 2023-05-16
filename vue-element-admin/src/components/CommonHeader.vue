@@ -32,15 +32,22 @@
             </div>           
         </el-header>
         <div>
-           <el-tag
-           v-for="(item,index) in routerStoreList.routerList"
-           closable
-           style="margin-left: 15px;"
-           size="large"
-           @click="changeRouter"
-           >
-           {{ item.routerName }}
-           </el-tag>
+        <el-tabs
+            v-model="editableTabsValue"
+            type="card"
+            closable
+            class="demo-tabs"
+            @tab-remove="removeTab"
+            @tab-click	="changeTabLight"
+            >
+            <el-tab-pane
+            v-for="item in routerStoreList.setrouterStore"
+            :key="item.path"
+            :label="item.routerName"
+            :name="item.routerName"
+            >
+            </el-tab-pane>
+        </el-tabs>
         </div>
     </div>
 </template>
@@ -53,14 +60,11 @@ export default{
     name:'CommonHeader',
     setup(){
         const usericon = new URL("../assets/user.jpg",import.meta.url).href
-        //改变侧边栏展开状态
         const changeCollpase=()=>{
             const store = isCollapse()
             store.isCollapse=store.isCollapse?false:true
         }
-        //根据路由改变标题
         const router = useRouter()
-        //获取标题列表函数
         const getTitleList = function(){
             let routerList = router.currentRoute.value.matched
             let titleList =[]
@@ -70,9 +74,7 @@ export default{
             return titleList
         }
 
-        //tag标签添加路由信息
         let routerStoreList = routerStore()
-        //添加状态路由信息函数
         const changeTagRouterStore = function(){
             return {
                 routerPath:router.currentRoute.value.fullPath,
@@ -86,16 +88,26 @@ export default{
         },
         { immediate: true }
         )
-        //tag跳转路由
-        const changeRouter = function(){
-            
+        // tab标签进行页面管理
+        let tabIndex = 0
+        let editableTabsValue = ref('首页')
+        const editableTabs = ref(routerStoreList.routerList)
+        const removeTab =function(event){
+           console.log(event);
+        }
+        const changeTabLight =function(event){
+            editableTabsValue = event.props.name
         }
         return{
+            tabIndex,
             changeCollpase,
             usericon,
             getTitleList,
-            changeRouter,
-            routerStoreList
+            routerStoreList,
+            editableTabsValue,
+            editableTabs,
+            removeTab,
+            changeTabLight
         }
     },
     

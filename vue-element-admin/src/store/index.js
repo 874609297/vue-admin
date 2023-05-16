@@ -14,13 +14,15 @@ export const routerStore = defineStore('routerStore',{
         return{
             routerList:[
                
-            ]
+            ],
+            pathIndex:''
         }
     },
     getters:{
-        // 对路由tag进行去重处理
-        setrouterStore:()=>{
-            
+        setrouterStore(state){
+            return state.routerList.filter((item,index,arr)=>{
+                return arr.findIndex(el=>el.routerName==item.routerName) === index
+            })
         }
     }
 })
