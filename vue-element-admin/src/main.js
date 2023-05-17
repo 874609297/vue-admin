@@ -8,7 +8,7 @@ import router from './router/index'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { createPinia } from 'pinia'
-
+import "../mock/index"
 
 const app = createApp(App)
 app.use(router).use(createPinia()).use(ElementPlus,{
